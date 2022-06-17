@@ -1,0 +1,51 @@
+@model ICollection<Post>
+@{
+    ViewData["Title"] = "Cadastro";
+}
+<h2>Listagem de Posts</h2>
+<h4>@ViewData["msg"]</h4>
+
+<form asp-controller="Post" asp-action="Lista" method="GET">
+    <fieldset>
+        <legend>Filtros</legend>
+        <p >Termo: <input type="text" name="q" /></p>
+        <p>Ordenação:
+            <select name="ordem">
+                <option value="t">Título</option>
+                <option value="d">Data</option>
+            </select>
+        </p>
+        <input type="submit" value="buscar" class="btn-success"/>
+    </fieldset>
+</form>
+<br />
+
+@if (Model != null)
+{
+    <table id="tblPosts" class="table- table-hover table-dark">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Data</th>
+                <th>Nº de comentários</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Post item in Model)
+            {
+                <tr>
+                    <td>@item.Titulo</td>
+                    <td>@item.Data</td>
+                    <td>@(item.Comentarios == null ? 0 : item.Comentarios.Count)</td>
+                    <td>
+                        <a class="btn-primary" href="/Post/editar?id=@item.Id" style="padding:1px ;" >Editar</a>
+                        <a class="btn-danger" href="/Post/excluir?id=@item.Id" style="padding:1px ;" >Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+    
+}

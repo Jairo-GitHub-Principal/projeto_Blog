@@ -1,0 +1,10 @@
+@model int
+<form asp-action="Cadastrar" asp-controller="Comentario" method="POST"
+class="form-comment">
+<input type="hidden" name="PostId" value="@Model"/>
+<input type="text" name="Autor" placeholder="Nome" class="comment-n
+ame"/>
+<textarea name="Conteudo" placeholder="Comentário" class="comment-t
+ext" rows="4" cols="50"></textarea>
+<input type="submit" value="Comentar"/>
+</form>
